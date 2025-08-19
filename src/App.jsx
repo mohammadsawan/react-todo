@@ -13,11 +13,15 @@ const App = () => {
         inputRef.current.value = "";
     }
 
+    const handelTodoDelete = (index) => {
+        setTodos(todos.filter((todo,i) => i !== index))
+    }
+
     return (
         <div>
             <h2>React Todo App</h2>
             <AddTodos inputRef={inputRef} handelTodoAdd={handelTodoAdd} />
-            <Todos todos={todos} />
+            <Todos todos={todos} handelDelete={handelTodoDelete}/>
         </div>
     )
 }
