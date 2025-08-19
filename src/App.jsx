@@ -9,7 +9,6 @@ const App = () => {
         if (value === '' || null) return;
         setTodos([...todos, value]);
         inputRef.current.value = "";
-        console.log(todos)
     }
 
     return (
@@ -17,6 +16,13 @@ const App = () => {
             <h2>React Todo App</h2>
             <input type='text' ref={inputRef} placeholder='Enter some tasks...'/>
             <button onClick={handelTodoAdd}>Add</button>
+
+            <ul>
+                {todos.map((todo,index) => (
+                     <p key={index}>{todo}</p>
+                    ))
+                }
+            </ul>
         </div>
     )
 }
