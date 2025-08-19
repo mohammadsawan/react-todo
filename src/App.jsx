@@ -1,11 +1,20 @@
-import {useState, useRef} from 'react'
+import {useState, useRef, useEffect} from 'react'
 import AddTodos from "./components/AddTodos.jsx";
 import Todos from "./components/Todos.jsx";
 
 const App = () => {
     const [todos, setTodos] = useState([]);
     const [editTodo, setEditTodo] = useState(null);
+    const [triggerBtn, setTriggerBtn] = useState('');
     const inputRef = useRef('');
+
+    useEffect(() => {
+        if(editTodo !== null && editTodo !== undefined) {
+            setTriggerBtn('Edit Task');
+        }else {
+            setTriggerBtn('Add Task');
+        }
+    }, [editTodo])
 
     const startEdit = (index) => {
         inputRef.current.value = todos[index];
@@ -35,8 +44,8 @@ const App = () => {
 
     return (
         <div>
-            <h2>React Todo App</h2>
-            <AddTodos inputRef={inputRef} handelTodoAddEdit={handelTodoAddEdit} />
+            <h2 className='text-center mt-10 font-bold text-3xl'>React Todo App</h2>
+            <AddTodos inputRef={inputRef} handelTodoAddEdit={handelTodoAddEdit} triggerAddBtn={triggerBtn}/>
             <Todos todos={todos} handelDelete={handelTodoDelete} startEdit={startEdit}/>
         </div>
     )
