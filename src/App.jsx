@@ -1,4 +1,6 @@
 import {useState, useRef} from 'react'
+import AddTodos from "./components/AddTodos.jsx";
+import Todos from "./components/Todos.jsx";
 
 const App = () => {
     const [todos, setTodos] = useState([]);
@@ -14,15 +16,8 @@ const App = () => {
     return (
         <div>
             <h2>React Todo App</h2>
-            <input type='text' ref={inputRef} placeholder='Enter some tasks...'/>
-            <button onClick={handelTodoAdd}>Add</button>
-
-            <ul>
-                {todos.map((todo,index) => (
-                     <p key={index}>{todo}</p>
-                    ))
-                }
-            </ul>
+            <AddTodos inputRef={inputRef} handelTodoAdd={handelTodoAdd} />
+            <Todos todos={todos} />
         </div>
     )
 }
